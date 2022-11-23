@@ -37,7 +37,8 @@ namespace JeuMotMeles
             Plateau matrixGame = new Plateau();
             matrixGame.ToRead(filePath);
             Console.WriteLine(matrixGame.ToString());
-            Console.WriteLine(matrixGame.Test_Plateau("test", 1, 1, "SE"));
+
+            //Console.WriteLine(matrixGame.Test_Plateau("test", 1, 1, "SE"));
         }
     }
 }

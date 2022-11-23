@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -68,12 +69,24 @@ namespace JeuMotMeles
 
         public void ToFile (string nomFile)
         {
+            StreamWriter masterWriter = new StreamWriter(nomFile);
 
+            int maxLength;
+
+            masterWriter.Close();
         }
 
         public void ToRead (string nomfile)
         {
-            string[] lines = System.IO.File.ReadAllLines(nomfile);
+            StreamReader masterReader = new StreamReader(nomfile);
+            List<string> lines = new List<string>();
+
+            string value = masterReader.ReadLine();
+            while (value != null)
+            {
+                lines.Add(value);
+                value = masterReader.ReadLine();
+            }
 
             string[] tabLineInfo = lines[0].Split(";");
             string[] tabLineWords = lines[1].Split(";");
@@ -104,6 +117,7 @@ namespace JeuMotMeles
 
             this.level = level;
             this.words = tabLineWords;
+            masterReader.Close();
         }
 
         public bool Test_Plateau (string mot, int ligne, int colonne, string direction)
