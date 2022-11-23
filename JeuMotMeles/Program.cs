@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace JeuMotMeles
 {
@@ -16,9 +17,23 @@ namespace JeuMotMeles
             }
         }
 
+        static string GetFilePath (string filename) 
+        {
+            string currentPath = Directory.GetCurrentDirectory();
+            string[] listPath = currentPath.Split("\\");
+            string path = "";
+
+            for (int i = 0; i < listPath.Length - 3; i++)
+            {
+                path += $"{listPath[i]}/";
+            }
+            return path + filename;
+        }
+
         static void Main(string[] args)
         {
-            string filePath = "C:\\Users\\33782\\Downloads\\CasSimple.csv";
+            string filePath = GetFilePath("CasSimple.csv");
+            Console.WriteLine(filePath);
             Plateau matrixGame = new Plateau();
             matrixGame.ToRead(filePath);
             Console.WriteLine(matrixGame.ToString());

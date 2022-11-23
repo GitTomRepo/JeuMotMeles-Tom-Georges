@@ -16,7 +16,7 @@ namespace JeuMotMeles
         public Plateau ()
         {
             this.level = 0;
-
+            
             this.matrix = null;
             this.words = null;
         }
