@@ -67,13 +67,83 @@ namespace JeuMotMeles
             return $"Niveau : {this.level} - Mots à trouver : {DisplayWords()}\nMatrice : \n{DisplayMatrix()}";
         }
 
-        public void ToFile (string nomFile)
+        public void ToFile (string nomFile) // TODO : Replace all the content of the nomFile.csv in the current directory by the actual content
         {
-            StreamWriter masterWriter = new StreamWriter(nomFile);
+            //StreamWriter masterWriter = new StreamWriter(nomFile);
 
-            int maxLength;
+            int maxCol = 4;
+            int colMatrix = this.matrix.GetLength(1);
+            int lineMatrix = this.matrix.GetLength(0);
+            int numWords = this.words.Length;
 
-            masterWriter.Close();
+            int maxLine = 2 + lineMatrix;
+            string[] lines = new string[maxLine];
+
+            string lineContent;
+
+            if (maxCol < colMatrix)
+            {
+                maxCol = colMatrix;
+            }
+            if (maxCol < numWords)
+            {
+                maxCol = numWords;
+            }
+
+            for (int i = 0; i < maxLine; i++)
+            {
+                lineContent = "";
+                for (int j = 0; j < maxCol; j++)
+                {
+                    if (i == 0)
+                    {
+                        // Line 1
+                        if (j < 4)
+                        {
+                            switch (j)
+                            {
+                                case 0:
+                                    lineContent += $"{this.level}";
+                                    break;
+                                case 1:
+                                    lineContent += $"{lineMatrix}";
+                                    break;
+                                case 2:
+                                    lineContent += $"{colMatrix}";
+                                    break;
+                                case 3:
+                                    lineContent += $"{numWords}";
+                                    break;
+                            }
+                        }
+                    }
+                    else if (i == 1)
+                    {
+                        // Line 2
+                        if (j < numWords)
+                        {
+                            lineContent += this.words[j];
+                        }
+                    }
+                    else
+                    {
+                        // Matrix
+                        if (j < colMatrix)
+                        {
+                            lineContent += this.matrix[i - 2, j];
+                        }
+                    }
+
+                    if (j != maxCol - 1) // Prevent from adding ";" at the end of the line
+                    {
+                        lineContent += ";";
+                    }                    
+                }
+                Console.WriteLine(lineContent);
+                lines[i] = lineContent; 
+            }
+
+            //masterWriter.Close();
         }
 
         public void ToRead (string nomfile)

@@ -37,6 +37,7 @@ namespace JeuMotMeles
             Plateau matrixGame = new Plateau();
             matrixGame.ToRead(filePath);
             Console.WriteLine(matrixGame.ToString());
+            matrixGame.ToFile("test.txt");
 
             //Console.WriteLine(matrixGame.Test_Plateau("test", 1, 1, "SE"));
         }
