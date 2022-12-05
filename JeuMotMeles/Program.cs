@@ -57,6 +57,21 @@ namespace JeuMotMeles
             }
             return path + filename;
         }
+        public static void affichage()
+        {
+            Console.WriteLine(" La partie commence ");
+            Console.WriteLine("Choisissez la langue (FR/EN)");
+            string langue = Console.ReadLine();
+            Console.WriteLine("Joueur 1 , ecrivez votre prenom ");
+            string prenom1 = Console.ReadLine();
+            Joueur joueur_1 = new Joueur(prenom1);
+            Console.WriteLine("Joueur 2 , ecrivez votre prenom ");
+            string prenom2 = Console.ReadLine();
+            Joueur joueur_2 = new Joueur(prenom2);
+
+            Console.WriteLine(DateTime.Now.ToString("HH:mm:ss"));
+        }
+
 
         static void Main(string[] args)
         {
