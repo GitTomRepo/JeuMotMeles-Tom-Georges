@@ -57,7 +57,7 @@ namespace JeuMotMeles
             }
             return path + filename;
         }
-        public static void affichage()
+        public static void Affichage()
         {
             Console.WriteLine(" La partie commence ");
             Console.WriteLine("Choisissez la langue (FR/EN)");

@@ -292,6 +292,8 @@ namespace JeuMotMeles
             return state;
         }
 
+
+
         /* MODE GENERATION AUTOMATIQUE
         public void GenerePlateau ()
         {
