@@ -22,28 +22,23 @@ namespace JeuMotMeles
                 string path = Program.GetFilePath("MotsPossiblesFR.txt"); // Recuperation du chemin d'accès du fichier
 
                 masterReader = new StreamReader(path); // Initialisation du StreamReader
-                int numLength = 0; // Compteur de taille differentes
 
-                this.dicoTab = new string[8]; // 8 tailles differentes de mots
-                this.lengthWords = new int[8];
+                dicoTab = new string[14];
+                int line = 0;
+                int ranq = 0;
+                string value = "";
 
-                // Lecture de tous les élements du fichier (ligne par ligne)
-                string lineGenerate = "";
-                string value = masterReader.ReadLine();
                 while (value != null)
                 {
-                    if (value.Length > 1)
+                    if (line%2 == 0 && line != 0)
                     {
-                        lineGenerate += value;
+                        dicoTab[ranq] = value;
+                        ranq += 1;
                     }
-                    else
-                    {
-                        this.dicoTab[numLength] = lineGenerate;
-                        numLength += 1;
-                    }
-
+                    line += 1;
                     value = masterReader.ReadLine();
                 }
+
                 masterReader.Close();
             }
             else if (this.lang == "EN")
@@ -53,7 +48,7 @@ namespace JeuMotMeles
                 masterReader = new StreamReader(path); // Initialisation du StreamReader
                 int numLength = 0; // Compteur de taille differentes
 
-                this.dicoTab = new string[8]; // 8 tailles differentes de mots
+                this.dicoTab = new string[7]; // 7 tailles differentes de mots
                 this.lengthWords = new int[8];
 
                 // Lecture de tous les élements du fichier (ligne par ligne)
@@ -67,7 +62,10 @@ namespace JeuMotMeles
                     }
                     else
                     {
-                        this.dicoTab[numLength] = lineGenerate;
+                        if (numLength != 0)
+                        {
+                            this.dicoTab[numLength - 1] = lineGenerate;
+                        }
                         numLength += 1;
                     }
 
@@ -94,6 +92,15 @@ namespace JeuMotMeles
             GetTabWords();
         }
 
-        public 
+        public override string ToString()
+        {
+            //Console.WriteLine(this.dicoTab.Length);
+            for (int i = 0; i < this.dicoTab.Length; i++)
+            {
+                Console.WriteLine(this.dicoTab[i].Split(" ").Length);
+            }
+            Console.WriteLine(this.dicoTab[0]);
+            return "";
+        }
     }
 }

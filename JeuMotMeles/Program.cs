@@ -68,8 +68,9 @@ namespace JeuMotMeles
             //matrixGame.ToFile(filePath);
 
             Dictionnaire dicoFr = new Dictionnaire("FR");
-            Dictionnaire dicoEn = new Dictionnaire("EN");
+            //Dictionnaire dicoEn = new Dictionnaire("EN");
             //Console.WriteLine(matrixGame.Test_Plateau("test", 1, 1, "SE"));
+            dicoFr.ToString();
         }
     }
 }
