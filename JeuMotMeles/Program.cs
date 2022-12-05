@@ -3,7 +3,7 @@ using System.IO;
 
 namespace JeuMotMeles
 {
-    internal class Program
+    public class Program
     {
         /// <summary>
         /// Fonction qui permet d'afficher tous les elements d'une matrice
@@ -21,26 +21,39 @@ namespace JeuMotMeles
             }
         }
 
-        static string GetFilePath (string filename) // TO DO : Vérifier que le fichier est au format csv
+        /// <summary>
+        /// Fonction qui permet de générer le chemin d'accès pour la lecture et l'écriture d'un fichier dans le répertoire de notre programme
+        /// </summary>
+        /// <param name="filename"> Nom du fichier (en .csv) </param>
+        /// <returns> Chemin d'accès du fichier à écrire / lire </returns>
+        public static string GetFilePath (string filename)
         {
             string currentPath = Directory.GetCurrentDirectory(); // Recuperation du repertoir courant
             string[] listPath = currentPath.Split("\\"); // Recuperation des sous repertoir pour avoir toute l'arborescence
             string path = ""; // Initialisation du chemin d'acces
 
             string[] splitFileName = filename.Split(".");
-            if (splitFileName.Length == 2)
+            if (splitFileName.Length == 2) // Vérification du nom du fichier au format : XX.format
             {
-                if (splitFileName[1] == "csv")
+                if (splitFileName[1] == "csv") // Vérification du format du fichier au .csv
                 {
                     for (int i = 0; i < listPath.Length - 3; i++) // Parcours de toute l'arborescence en partant du debut jusqu'au repertoir du projet
                     {
                         path += $"{listPath[i]}/"; // Generation de la racine du chemin d'acces
                     }
                 }
+                else
+                {
+                    Console.WriteLine($"<FileType> : Class Program - GetFilePath | .{splitFileName[1]} format");
+                    for (int i = 0; i < listPath.Length - 3; i++) // Parcours de toute l'arborescence en partant du debut jusqu'au repertoir du projet
+                    {
+                        path += $"{listPath[i]}/"; // Generation de la racine du chemin d'acces
+                    }
+                }
             }
-            for (int i = 0; i < listPath.Length - 3; i++) // Parcours de toute l'arborescence en partant du debut jusqu'au repertoir du projet
+            else
             {
-                path += $"{listPath[i]}/"; // Generation de la racine du chemin d'acces
+                Console.WriteLine("<EmptyFileName> : Class Program - GetFilePath");
             }
             return path + filename;
         }
@@ -48,12 +61,14 @@ namespace JeuMotMeles
         static void Main(string[] args)
         {
             string filePath = GetFilePath("CasSimple.csv");
-            Console.WriteLine(filePath);
             Plateau matrixGame = new Plateau();
             matrixGame.ToRead(filePath);
             Console.WriteLine(matrixGame.ToString());
-            matrixGame.ToFile("test.txt");
+            //filePath = GetFilePath("test.csv");
+            //matrixGame.ToFile(filePath);
 
+            Dictionnaire dicoFr = new Dictionnaire("FR");
+            Dictionnaire dicoEn = new Dictionnaire("EN");
             //Console.WriteLine(matrixGame.Test_Plateau("test", 1, 1, "SE"));
         }
     }

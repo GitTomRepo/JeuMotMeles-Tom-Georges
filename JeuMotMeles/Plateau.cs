@@ -82,7 +82,7 @@ namespace JeuMotMeles
 
         public void ToFile (string nomFile) // TODO : Replace all the content of the nomFile.csv in the current directory by the actual content
         {
-            //StreamWriter masterWriter = new StreamWriter(nomFile);
+            StreamWriter masterWriter = new StreamWriter(nomFile);
 
             // Le nombre d'informations minimum est de 4 sur la première ligne
             int maxCol = 4;
@@ -158,7 +158,11 @@ namespace JeuMotMeles
                 lines[i] = lineContent; // Remplissage du tableau contenant les lignes
             }
 
-            //masterWriter.Close();
+            for (int k = 0; k < lines.Length; k++)
+            {
+                masterWriter.WriteLine(lines[k]);
+            }
+            masterWriter.Close();
         }
 
         /// <summary>
