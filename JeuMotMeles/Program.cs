@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace JeuMotMeles
@@ -86,6 +87,11 @@ namespace JeuMotMeles
             //Dictionnaire dicoEn = new Dictionnaire("EN");
             //Console.WriteLine(matrixGame.Test_Plateau("test", 1, 1, "SE"));
             dicoFr.ToString();
+            List<string> list = new List<string>();
+            string wordToFind = "CACA";
+            list = dicoFr.WordList(wordToFind);
+            bool result = dicoFr.RechDichoRecursif(wordToFind, list, list.Count - 1);
+            Console.WriteLine(result);
         }
     }
 }

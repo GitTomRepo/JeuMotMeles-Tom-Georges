@@ -23,17 +23,24 @@ namespace JeuMotMeles
 
                 masterReader = new StreamReader(path); // Initialisation du StreamReader
 
-                dicoTab = new string[14];
+                this.dicoTab = new string[14];
+                this.lengthWords = new int[14];
                 int line = 0;
                 int ranq = 0;
+                string valLength = "0";
                 string value = "";
 
                 while (value != null)
                 {
                     if (line%2 == 0 && line != 0)
                     {
-                        dicoTab[ranq] = value;
+                        this.dicoTab[ranq] = value;
+                        this.lengthWords[ranq] = Convert.ToInt32(valLength);
                         ranq += 1;
+                    }
+                    else
+                    {
+                        valLength = value;
                     }
                     line += 1;
                     value = masterReader.ReadLine();
@@ -92,15 +99,72 @@ namespace JeuMotMeles
             GetTabWords();
         }
 
+        /// <summary>
+        /// Retourne la liste de tous les mots de memes longueurs que le mot passé en paramètres
+        /// </summary>
+        /// <param name="word"></param>
+        /// <returns></returns>
+        public List<string> WordList (string word)
+        {
+            List<string> list = new List<string>();
+            string[] tabRet = null;
+            int index = 0;
+            int scaleWord = word.Length;
+            bool hit = false;
+            for (int i = 0; i < lengthWords.Length && !hit; i++)
+            {
+                if (scaleWord == lengthWords[i])
+                {
+                    hit = true;
+                    index = i;
+                    tabRet = dicoTab[i].Split(" ");
+                }
+            }
+
+            Console.WriteLine(dicoTab[index]);
+
+            for (int j = 0; j < tabRet.Length; j++)
+            {
+                list.Add(tabRet[j]);
+            }
+            return list;
+        }
+
         public override string ToString()
         {
-            //Console.WriteLine(this.dicoTab.Length);
+            string retValue = "";
             for (int i = 0; i < this.dicoTab.Length; i++)
             {
-                Console.WriteLine(this.dicoTab[i].Split(" ").Length);
+                retValue += $"{this.dicoTab[i].Split(" ").Length} \t {this.lengthWords[i]} \n";
             }
-            Console.WriteLine(this.dicoTab[0]);
-            return "";
+            //Console.WriteLine(retValue);
+            return retValue;
+        }
+
+        public bool RechDichoRecursif(string mot, List<string> lineTab, int end, int start = 0)
+        {
+            int length = end - start;
+            if (length == 1) 
+            {
+                if (mot == lineTab[start])
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            int midRanq = (start + end) / 2;
+            if (lineTab[midRanq].CompareTo(mot) > 0)
+            {
+                return RechDichoRecursif(mot, lineTab, midRanq, start);
+            }
+            else
+            {
+                return RechDichoRecursif(mot, lineTab, end, midRanq);
+            }
         }
     }
 }
