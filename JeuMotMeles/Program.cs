@@ -71,6 +71,8 @@ namespace JeuMotMeles
             Joueur joueur_2 = new Joueur(prenom2);
 
             Console.WriteLine(DateTime.Now.ToString("HH:mm:ss"));
+
+
         }
 
 
