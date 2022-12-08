@@ -22,12 +22,10 @@ namespace JeuMotMeles
             if (this.lang == "FR")
             {
                 path = Program.GetFilePath("MotsPossiblesFR.txt"); // Recuperation du chemin d'accès du fichier
-                this.lang = "FR";
             }
             else if (this.lang == "EN")
             {
                 path = Program.GetFilePath("MotsPossiblesEN.txt"); // Recuperation du chemin d'accès du fichier
-                this.lang = "EN";
             }
 
             masterReader = new StreamReader(path); // Initialisation du StreamReader
@@ -134,6 +132,8 @@ namespace JeuMotMeles
         public bool RechDichoRecursif(string mot, List<string> lineTab, int end, int start = 0)
         {
             int length = end - start; // Calcul de la taille de la liste consideree
+            int midRanq = (start + end) / 2; // Calcul du rang centrale de la liste
+
             if (length == 1) // Condition d'arret
             {
                 if (mot == lineTab[start])
@@ -146,7 +146,6 @@ namespace JeuMotMeles
                 }
             }
 
-            int midRanq = (start + end) / 2; // Calcul du rang centrale de la liste
             if (lineTab[midRanq].CompareTo(mot) > 0) // Comparaison du mot au centre de la liste et du mot a trouver
             {
                 return RechDichoRecursif(mot, lineTab, midRanq, start); // Element a gauche 

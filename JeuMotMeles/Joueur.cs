@@ -41,7 +41,7 @@ namespace JeuMotMeles
             {
                 int scaleList = this.findWords.Count;
 
-                for (int i = 0; i < scaleList; i++)
+                for (int i = 0; i < scaleList; i++) // Ajout des mots trouves dans le tableau de retour
                 {
                     listContent += this.findWords[i];
                 }

@@ -80,7 +80,7 @@ namespace JeuMotMeles
             return $"Niveau : {this.level} - Mots à trouver : {DisplayWords()}\nMatrice : \n{DisplayMatrix()}"; // Formatage des informations
         }
 
-        public void ToFile (string nomFile) // TODO : Replace all the content of the nomFile.csv in the current directory by the actual content
+        public void ToFile (string nomFile)
         {
             StreamWriter masterWriter = new StreamWriter(nomFile);
 
@@ -105,9 +105,9 @@ namespace JeuMotMeles
                 maxCol = numWords;
             }
 
-            for (int i = 0; i < maxLine; i++)
+            for (int i = 0; i < maxLine; i++) // Boucle de generation de toutes les lignes du fichier
             {
-                lineContent = "";
+                lineContent = ""; // Contenu de la ligne par default
                 for (int j = 0; j < maxCol; j++)
                 {
                     if (i == 0)
@@ -158,11 +158,11 @@ namespace JeuMotMeles
                 lines[i] = lineContent; // Remplissage du tableau contenant les lignes
             }
 
-            for (int k = 0; k < lines.Length; k++)
+            for (int k = 0; k < lines.Length; k++) // Ecriture des lignes generees dans le fichier
             {
                 masterWriter.WriteLine(lines[k]);
             }
-            masterWriter.Close();
+            masterWriter.Close(); // Fermeture du fichier en ecriture
         }
 
         /// <summary>
@@ -214,7 +214,7 @@ namespace JeuMotMeles
             this.level = level;
             this.words = tabLineWords;
 
-            masterReader.Close();
+            masterReader.Close(); // Fermeture du fichier en lecture
         }
 
         /// <summary>
